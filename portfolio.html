@@ -80,11 +80,40 @@
         .hero {
             min-height: 100vh;
             display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: flex-start;
+            flex-direction: row;
+            /* Changed to row to place text and image side-by-side */
+            justify-content: space-between;
+            align-items: center;
             padding: 0 10%;
             background: radial-gradient(circle at top right, #1e293b 0%, transparent 40%);
+            gap: 2rem;
+        }
+
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            max-width: 600px;
+        }
+
+        /* Hero Image Styles */
+        .hero-image-container {
+            flex-shrink: 0;
+        }
+
+        .hero-image {
+            width: 350px;
+            height: 350px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--primary);
+            box-shadow: 0 0 25px rgba(56, 189, 248, 0.2);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .hero-image:hover {
+            transform: scale(1.03);
+            box-shadow: 0 0 35px rgba(56, 189, 248, 0.4);
         }
 
         /* Typewriter Container */
@@ -97,21 +126,15 @@
             margin-bottom: 0.5rem;
             color: var(--text-main);
             overflow: hidden;
-            /* Ensures the content is not revealed until the animation */
             border-right: .15em solid var(--primary);
-            /* The typwriter cursor */
             white-space: nowrap;
-            /* Keeps the content on a single line */
             margin: 0;
             letter-spacing: 0.05em;
-
-            /* Animation */
             animation:
                 typing 3s steps(30, end),
                 blink-caret .75s step-end infinite;
         }
 
-        /* The typing effect */
         @keyframes typing {
             from {
                 width: 0
@@ -122,7 +145,6 @@
             }
         }
 
-        /* The typewriter cursor effect */
         @keyframes blink-caret {
 
             from,
@@ -143,7 +165,6 @@
         }
 
         .hero p {
-            max-width: 600px;
             color: var(--text-muted);
             margin-bottom: 2rem;
         }
@@ -157,6 +178,7 @@
             position: relative;
             overflow: hidden;
             z-index: 1;
+            display: inline-block;
         }
 
         .btn::before {
@@ -335,28 +357,6 @@
             font-family: monospace;
         }
 
-        /* --- SKILLS --- */
-        .skills-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-        .skill-tag {
-            background: var(--card-bg);
-            padding: 0.6rem 1.2rem;
-            border-radius: 4px;
-            border-left: 3px solid var(--accent);
-            color: var(--text-main);
-            font-size: 0.95rem;
-            transition: 0.3s;
-        }
-
-        .skill-tag:hover {
-            background: var(--card-hover);
-            transform: translateX(5px);
-        }
-
         /* --- CATEGORIZED SKILLS --- */
         .skills-grid {
             display: grid;
@@ -394,10 +394,19 @@
             gap: 0.8rem;
         }
 
-        /* Adjust tag style for smaller container */
         .skill-tag {
+            background: var(--card-bg);
+            border-radius: 4px;
+            border-left: 3px solid var(--accent);
+            color: var(--text-main);
+            transition: 0.3s;
             font-size: 0.85rem;
             padding: 0.4rem 0.8rem;
+        }
+
+        .skill-tag:hover {
+            background: var(--card-hover);
+            transform: translateX(5px);
         }
 
         /* --- FOOTER --- */
@@ -411,14 +420,34 @@
         }
 
         /* --- RESPONSIVE --- */
-        @media (max-width: 768px) {
+        @media (max-width: 900px) {
+            .hero {
+                flex-direction: column-reverse;
+                /* Stacks image above text on smaller screens */
+                justify-content: center;
+                text-align: center;
+                padding-top: 120px;
+            }
+
+            .hero-content {
+                align-items: center;
+            }
+
             .hero h1 {
-                font-size: 2rem;
+                font-size: 2.5rem;
                 white-space: normal;
                 border: none;
                 animation: none;
             }
 
+            .hero-image {
+                width: 250px;
+                height: 250px;
+                margin-bottom: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
             section {
                 padding: 3rem 5%;
             }
@@ -444,15 +473,20 @@
     </nav>
 
     <section class="hero" id="about">
-        <div class="typewriter-container">
-            <h1>Sree Divya Kudupudi</h1>
+        <div class="hero-content">
+            <div class="typewriter-container">
+                <h1>Sree Divya Kudupudi</h1>
+            </div>
+            <h2>Software Engineer 2</h2>
+            <p>
+                Specializing in C++ Optimization, Full Stack Development, and Machine Learning.
+                Currently engineering high-performance solutions at FactSet.
+            </p>
+            <a href="mailto:sreedivyakudupudi@gmail.com" class="btn">Get In Touch</a>
         </div>
-        <h2>Software Engineer 2</h2>
-        <p>
-            Specializing in C++ Optimization, Full Stack Development, and Machine Learning.
-            Currently engineering high-performance solutions at FactSet.
-        </p>
-        <a href="mailto:sreedivyakudupudi@gmail.com" class="btn">Get In Touch</a>
+        <div class="hero-image-container">
+            <img src="profile.jpeg" alt="Sree Divya Kudupudi" class="hero-image">
+        </div>
     </section>
 
     <section id="experience">
@@ -657,8 +691,8 @@
                 style="color: var(--primary);">sreedivyakudupudi@gmail.com</a> | +91 9014763396</p>
         <p style="margin-top: 10px;">
             <a href="https://www.linkedin.com/in/sree-divya-kudupudi-452772215" target="_blank">LinkedIn</a> •
-            <a href="#" target="_blank">LeetCode</a> •
-            <a href="#" target="_blank">GeeksforGeeks</a>
+            <a href="https://leetcode.com/u/sreedivyakudupudi/" target="_blank">LeetCode</a> •
+            <a href="https://www.geeksforgeeks.org/profile/sreedivyak07" target="_blank">GeeksforGeeks</a>
         </p>
         <p style="margin-top: 2rem; opacity: 0.5;">&copy; 2026 Sree Divya Kudupudi. All Rights Reserved.</p>
     </footer>
