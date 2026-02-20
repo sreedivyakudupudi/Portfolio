@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sree Divya Kudupudi | Portfolio</title>
+    <style>
+        /* --- CSS VARIABLES & RESET --- */
+        :root {
+            --bg-color: #0f172a;
+            /* Dark Slate */
+            --card-bg: #1e293b;
+            /* Lighter Slate */
+            --card-hover: #263346;
+            --primary: #38bdf8;
+            /* Sky Blue */
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --accent: #2dd4bf;
+            /* Teal */
+            --cursor-color: #f1f5f9;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: 0.3s;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* --- HERO SECTION & TYPEWRITER --- */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 0 10%;
+            background: radial-gradient(circle at top right, #1e293b 0%, transparent 40%);
+        }
+
+        /* Typewriter Container */
+        .typewriter-container {
+            display: inline-block;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-main);
+            overflow: hidden;
+            /* Ensures the content is not revealed until the animation */
+            border-right: .15em solid var(--primary);
+            /* The typwriter cursor */
+            white-space: nowrap;
+            /* Keeps the content on a single line */
+            margin: 0;
+            letter-spacing: 0.05em;
+
+            /* Animation */
+            animation:
+                typing 3s steps(30, end),
+                blink-caret .75s step-end infinite;
+        }
+
+        /* The typing effect */
+        @keyframes typing {
+            from {
+                width: 0
+            }
+
+            to {
+                width: 100%
+            }
+        }
+
+        /* The typewriter cursor effect */
+        @keyframes blink-caret {
+
+            from,
+            to {
+                border-color: transparent
+            }
+
+            50% {
+                border-color: var(--primary);
+            }
+        }
+
+        .hero h2 {
+            font-size: 2rem;
+            color: var(--text-muted);
+            margin-top: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero p {
+            max-width: 600px;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            padding: 0.8rem 2rem;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            border-radius: 5px;
+            font-weight: bold;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 100%;
+            background: var(--primary);
+            z-index: -1;
+            transition: 0.3s ease;
+        }
+
+        .btn:hover {
+            color: #0f172a;
+        }
+
+        .btn:hover::before {
+            width: 100%;
+        }
+
+        /* --- SECTIONS GENERAL --- */
+        section {
+            padding: 5rem 10%;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .section-title::after {
+            content: '';
+            height: 1px;
+            flex-grow: 1;
+            background: #334155;
+            max-width: 300px;
+        }
+
+        /* --- EXPERIENCE TIMELINE --- */
+        .timeline-item {
+            border-left: 2px solid #334155;
+            padding-left: 2rem;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -6px;
+            top: 5px;
+            width: 10px;
+            height: 10px;
+            background: var(--primary);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--primary);
+        }
+
+        .role {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: var(--text-main);
+        }
+
+        .company {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .date {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .timeline-item ul li {
+            margin-bottom: 0.5rem;
+            color: var(--text-muted);
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .timeline-item ul li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+
+        /* --- ENHANCED PROJECTS GRID --- */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 12px;
+            transition: all 0.4s ease;
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .project-card:hover {
+            transform: translateY(-7px);
+            background: var(--card-hover);
+            border-color: var(--primary);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .folder-icon {
+            width: 40px;
+            height: 40px;
+            stroke: var(--primary);
+            fill: none;
+            stroke-width: 1.5;
+        }
+
+        .external-link {
+            stroke: var(--text-muted);
+            width: 20px;
+            height: 20px;
+            transition: 0.3s;
+        }
+
+        .project-card:hover .external-link {
+            stroke: var(--primary);
+        }
+
+        .project-title {
+            font-size: 1.35rem;
+            margin-bottom: 1rem;
+            color: var(--text-main);
+            font-weight: 600;
+        }
+
+        .project-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        /* Tech Stack Pills */
+        .tech-stack-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-top: auto;
+        }
+
+        .tech-pill {
+            font-size: 0.75rem;
+            color: var(--primary);
+            background: rgba(56, 189, 248, 0.1);
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-family: monospace;
+        }
+
+        /* --- SKILLS --- */
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .skill-tag {
+            background: var(--card-bg);
+            padding: 0.6rem 1.2rem;
+            border-radius: 4px;
+            border-left: 3px solid var(--accent);
+            color: var(--text-main);
+            font-size: 0.95rem;
+            transition: 0.3s;
+        }
+
+        .skill-tag:hover {
+            background: var(--card-hover);
+            transform: translateX(5px);
+        }
+
+        /* --- CATEGORIZED SKILLS --- */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-category {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .skill-category:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+
+        .skill-category h4 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .skill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        /* Adjust tag style for smaller container */
+        .skill-tag {
+            font-size: 0.85rem;
+            padding: 0.4rem 0.8rem;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: #020617;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+                white-space: normal;
+                border: none;
+                animation: none;
+            }
+
+            section {
+                padding: 3rem 5%;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo">SDK.</div>
+        <div class="nav-links">
+            <a href="#about">About</a>
+            <a href="#experience">Experience</a>
+            <a href="#projects">Projects</a>
+            <a href="#skills">Skills</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <section class="hero" id="about">
+        <div class="typewriter-container">
+            <h1>Sree Divya Kudupudi</h1>
+        </div>
+        <h2>Software Engineer 2</h2>
+        <p>
+            Specializing in C++ Optimization, Full Stack Development, and Machine Learning.
+            Currently engineering high-performance solutions at FactSet.
+        </p>
+        <a href="mailto:sreedivyakudupudi@gmail.com" class="btn">Get In Touch</a>
+    </section>
+
+    <section id="experience">
+        <h3 class="section-title">Where I've Worked</h3>
+
+        <div class="timeline-item">
+            <div class="role">Software Engineer 2</div>
+            <span class="company">FactSet</span>
+            <span class="date">Oct 2025 - Present</span>
+            <ul>
+                <li>Active contribution to software solution enhancements in an Agile environment.
+                </li>
+                <li>Collaborating with cross-functional teams to debug issues and improve system
+                    reliability.</li>
+                <li>Participating in sprint planning, daily stand-ups, and code reviews.</li>
+            </ul>
+        </div>
+
+        <div class="timeline-item">
+            <div class="role">Software Engineer</div>
+            <span class="company">FactSet</span>
+            <span class="date">Jul 2024 - Sept 2025</span>
+            <ul>
+                <li>Implemented multi-level financial calculations using C++ and Eigen to optimize linear
+                    algebra computations.</li>
+                <li>Automated schema generation using OOP principles, eliminating manual processes.</li>
+                <li>Awarded the <strong>Blue Ribbon Award</strong> for outstanding performance.
+                </li>
+                <li>Improved performance by implementing caching techniques for frequently accessed
+                    data.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="projects">
+        <h3 class="section-title">Featured Projects</h3>
+        <div class="project-grid">
+
+            <div class="project-card">
+                <div class="project-header">
+                    <svg class="folder-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+                    </svg>
+
+                    <a href="https://github.com/sreedivyakudupudi/Dashboard" target="_blank" class="icon-link"
+                        aria-label="View on GitHub">
+                        <svg class="external-link" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                            <polyline points="15 3 21 3 21 9"></polyline>
+                            <line x1="10" y1="14" x2="21" y2="3"></line>
+                        </svg>
+                    </a>
+                </div>
+                <div class="project-title">Creator Dashboard</div>
+                <p class="project-desc">
+                    A full-stack web app where users create profiles and earn credits. Features a
+                    personalized content feed from Twitter and Reddit integration.
+                </p>
+                <div class="tech-stack-container">
+                    <span class="tech-pill">React.js</span>
+                    <span class="tech-pill">Node.js</span>
+                    <span class="tech-pill">MongoDB</span>
+                    <span class="tech-pill">JWT</span>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <svg class="folder-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+                    </svg>
+                    <a href="https://github.com/sreedivyakudupudi/Project_main" target="_blank" class="icon-link"
+                        aria-label="View on GitHub">
+                        <svg class="external-link" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                            <polyline points="15 3 21 3 21 9"></polyline>
+                            <line x1="10" y1="14" x2="21" y2="3"></line>
+                        </svg>
+                    </a>
+                </div>
+                <div class="project-title">Crop Disease Detection</div>
+                <p class="project-desc">
+                    Fine-tuned VGG16 model for detecting crop diseases. Includes a chatbot interface
+                    providing remedies and fertilizer recommendations.
+                </p>
+                <div class="tech-stack-container">
+                    <span class="tech-pill">Python</span>
+                    <span class="tech-pill">VGG16 (CNN)</span>
+                    <span class="tech-pill">DialogFlow</span>
+                    <span class="tech-pill">MySQL</span>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <svg class="folder-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+                    </svg>
+                    <a href="https://github.com/sreedivyakudupudi/Ecommerce" target="_blank" class="icon-link"
+                        aria-label="View on GitHub">
+                        <svg class="external-link" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                            <polyline points="15 3 21 3 21 9"></polyline>
+                            <line x1="10" y1="14" x2="21" y2="3"></line>
+                        </svg>
+                    </a>
+                </div>
+                <div class="project-title">E-commerce Application</div>
+                <p class="project-desc">
+                    Full-stack shopping platform with secure payment integration, product filtering, cart
+                    management, and checkout functionality.
+                </p>
+                <div class="tech-stack-container">
+                    <span class="tech-pill">MongoDB</span>
+                    <span class="tech-pill">Express.js</span>
+                    <span class="tech-pill">React</span>
+                    <span class="tech-pill">Node.js</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <section id="skills">
+        <h3 class="section-title">Technical Skills</h3>
+
+        <div class="skills-grid">
+
+            <div class="skill-category">
+                <h4>💻 Languages</h4>
+                <div class="skill-list">
+                    <span class="skill-tag">C++</span>
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">Java</span>
+                    <span class="skill-tag">SQL</span>
+                    <span class="skill-tag">C</span>
+                </div>
+            </div>
+
+            <div class="skill-category">
+                <h4>🌐 Web Development</h4>
+                <div class="skill-list">
+                    <span class="skill-tag">React.js</span>
+                    <span class="skill-tag">Node.js</span>
+                    <span class="skill-tag">Express.js</span>
+                    <span class="skill-tag">MongoDB</span>
+                    <span class="skill-tag">HTML/CSS</span>
+                </div>
+            </div>
+
+            <div class="skill-category">
+                <h4>🛠 Tools & DevOps</h4>
+                <div class="skill-list">
+                    <span class="skill-tag">Git/GitHub</span>
+                    <span class="skill-tag">Perforce</span>
+                    <span class="skill-tag">VS Code</span>
+                    <span class="skill-tag">Cursor</span>
+                    <span class="skill-tag">Copilot</span>
+                </div>
+            </div>
+
+            <div class="skill-category">
+                <h4>🧠 Core Concepts</h4>
+                <div class="skill-list">
+                    <span class="skill-tag">Data Structures</span>
+                    <span class="skill-tag">Algorithms</span>
+                    <span class="skill-tag">OOP</span>
+                    <span class="skill-tag">Operating Systems</span>
+                    <span class="skill-tag">Agile/Scrum</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="education">
+        <h3 class="section-title">Education & Achievements</h3>
+        <div class="timeline-item">
+            <div class="role">B.Tech in Computer Science</div>
+            <span class="company">G.V.P. College of Engineering (A)</span>
+            <span class="date">2020 - 2024 | GPA: 9.11 </span>
+        </div>
+        <div class="project-grid" style="margin-top: 2rem;">
+            <div class="project-card" style="padding: 1.5rem;">
+                <div class="project-title">🏆 1st Prize Hackathon</div>
+                <p class="project-desc">"Perfection to Prediction" Inter-college ML Hackathon.</p>
+            </div>
+            <div class="project-card" style="padding: 1.5rem;">
+                <div class="project-title">🌍 Top 10 Finalist</div>
+                <p class="project-desc">T-AIM Academic Grand Challenge on Climate Change.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <p>Contact: <a href="mailto:sreedivyakudupudi@gmail.com"
+                style="color: var(--primary);">sreedivyakudupudi@gmail.com</a> | +91 9014763396</p>
+        <p style="margin-top: 10px;">
+            <a href="https://www.linkedin.com/in/sree-divya-kudupudi-452772215" target="_blank">LinkedIn</a> •
+            <a href="#" target="_blank">LeetCode</a> •
+            <a href="#" target="_blank">GeeksforGeeks</a>
+        </p>
+        <p style="margin-top: 2rem; opacity: 0.5;">&copy; 2026 Sree Divya Kudupudi. All Rights Reserved.</p>
+    </footer>
+
+</body>
+
+</html>
